@@ -53,6 +53,14 @@ public class User {
     private String email;
 
     /**
+     * The password of the user.
+     */
+    @Getter
+    @Setter
+    @ApiModelProperty("The password of the user.")
+    private String password;
+
+    /**
      * The wallet of the user.
      */
     @ApiModelProperty("The wallet of the user.")
