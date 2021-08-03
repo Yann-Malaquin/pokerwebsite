@@ -8,7 +8,7 @@ import fr.yannm.poker.payload.response.MessageResponse;
 import fr.yannm.poker.repository.RoleRepository;
 import fr.yannm.poker.repository.UserRepository;
 import fr.yannm.poker.security.jwt.JwtUtils;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -73,7 +73,7 @@ public class RegistryController {
      * @return the response entity
      */
     @PostMapping("signup")
-    @ApiModelProperty("The route of the registration of an user.")
+    @ApiOperation("The route of the registration of an user.")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 
         // If the username is already prest in the database

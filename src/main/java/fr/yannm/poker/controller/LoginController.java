@@ -6,7 +6,7 @@ import fr.yannm.poker.repository.RoleRepository;
 import fr.yannm.poker.repository.UserRepository;
 import fr.yannm.poker.security.jwt.JwtUtils;
 import fr.yannm.poker.security.service.UserDetailsImpl;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -75,7 +75,7 @@ public class LoginController {
      * @since 1.0
      */
     @PostMapping("/signin")
-    @ApiModelProperty("The route to authenticate a user.")
+    @ApiOperation("The route to authenticate a user.")
     public ResponseEntity<?> autenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         // Use to authenticate a login account
