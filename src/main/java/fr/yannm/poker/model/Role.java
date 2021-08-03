@@ -49,7 +49,7 @@ public class Role {
     /**
      * Instantiates a new Role.
      *
-     * @param _name the name
+     * @param name the name
      */
     public Role(ERole name) {
         this.name = name;
