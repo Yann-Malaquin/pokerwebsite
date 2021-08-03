@@ -1,13 +1,29 @@
 package fr.yannm.poker.model;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
+ * User is the entity that represents a user with :
+ * <ul>
+ *     <li>An id</li>
+ *     <li>A username</li>
+ *     <li>An email</li>
+ *     <li>A password</li>
+ *     <li>A wallet</li>
+ *     <li>A score</li>
+ *     <li>An amount of win</li>
+ *     <li>An amount of lost</li>
+ *     <li>An ratio w/l</li>
+ * </ul>
+ *
  * @author Yann
  * @version 1.0
  * @name : User
@@ -15,10 +31,7 @@ import javax.validation.constraints.NotNull;
  * @project poker
  * @copyright Yann
  **/
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Builder
 @Table(name = "users")
 public class User {
 
@@ -99,4 +112,43 @@ public class User {
     @Getter
     @Setter
     private double ratio = 0.0;
+
+    /**
+     * The role of the user.
+     */
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @Getter
+    @Setter
+    @ApiModelProperty("The role of the user.")
+    private Set<Role> roles = new HashSet<>();
+
+    public User() {
+    }
+
+    /**
+     * Instantiates a new User.
+     *
+     * @param username the username
+     * @param email    the email
+     * @param password the password
+     * @param wallet   the wallet
+     * @param score    the score
+     * @param win      the win
+     * @param lost     the lost
+     * @param ratio    the ratio
+     */
+    public User(String username, String email, String password, int wallet, int score,
+                int win, int lost, double ratio) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.wallet = wallet;
+        this.score = score;
+        this.win = win;
+        this.lost = lost;
+        this.ratio = ratio;
+    }
 }

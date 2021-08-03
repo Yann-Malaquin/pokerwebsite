@@ -30,4 +30,33 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @ApiModelProperty("Find a user by its id.")
     Optional<User> findById(Long id);
 
+    /**
+     * Find a user by its username.
+     *
+     * @param username
+     * @return an optional user
+     * @since 1.0
+     */
+    @ApiModelProperty("Find a user by its username.")
+    Optional<User> findByUsername(String username);
+
+    /**
+     * Find if a user already exists by its username.
+     *
+     * @param username
+     * @return an optional user
+     * @since 1.0
+     */
+    @ApiModelProperty("Find if a user already exists by its username.")
+    Boolean existsByUsername(String username);
+
+    /**
+     * Find if a user already exists by its email.
+     *
+     * @param email
+     * @return an optional user
+     * @since 1.0
+     */
+    @ApiModelProperty("Find if a user already exists by its email.")
+    Boolean existsByEmail(String email);
 }
