@@ -23,7 +23,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     /**
      * Find a user by its id.
      *
-     * @param id
+     * @param id the id of the user
      * @return an optional user
      * @since 1.0
      */
@@ -33,7 +33,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     /**
      * Find a user by its username.
      *
-     * @param username
+     * @param username the username of the user
      * @return an optional user
      * @since 1.0
      */
@@ -41,9 +41,19 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUsername(String username);
 
     /**
+     * Find a user by its email.
+     *
+     * @param email the email of the user
+     * @return an optional user
+     * @since 1.0
+     */
+    @ApiModelProperty("Find a user by its email.")
+    Optional<User> findByEmail(String email);
+
+    /**
      * Find if a user already exists by its username.
      *
-     * @param username
+     * @param username the username of the username
      * @return an optional user
      * @since 1.0
      */
@@ -53,7 +63,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     /**
      * Find if a user already exists by its email.
      *
-     * @param email
+     * @param email the email of the user
      * @return an optional user
      * @since 1.0
      */

@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * LoginController is the class that refers to the login of a user.
+ * LoginController is the controller that refers to the login of a user.
  *
  * @author Yann
  * @version 1.0
@@ -100,4 +100,6 @@ public class LoginController {
         return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(),
                 userDetails.getUsername(), userDetails.getEmail(), roles));
     }
+
+
 }

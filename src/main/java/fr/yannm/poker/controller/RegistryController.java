@@ -23,7 +23,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * RegistryController is the class that refers to the login of a user.
+ * RegistryController is the controller that refers to the login of a user.
  *
  * @author Yann
  * @version 1.0
