@@ -1,6 +1,7 @@
 package fr.yannm.poker.controller;
 
 import fr.yannm.poker.model.User;
+import fr.yannm.poker.payload.request.ModifyRequest;
 import fr.yannm.poker.payload.request.RecoveryRequest;
 import fr.yannm.poker.payload.response.MessageResponse;
 import fr.yannm.poker.repository.UserRepository;
@@ -8,10 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Optional;
@@ -78,4 +76,37 @@ public class PasswordController {
         return ResponseEntity.ok(new MessageResponse("Password changed with success !"));
     }
 
+    /**
+     * Routes used to change the password.
+     *
+     * @param modifyRequest the form to recover
+     * @return the response entity
+     * @since 1.0
+     */
+    @PutMapping("/{id}/modify")
+    @ApiOperation("The route used to modify a password.")
+    public ResponseEntity<?> modify(@PathVariable("id") Long id, @RequestBody @Valid ModifyRequest modifyRequest) {
+
+        User user;
+        Optional<User> userOptional;
+
+        // Check if the user exists
+        userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            user = userOptional.get();
+        } else {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: User does not exist"));
+        }
+
+        // Modify the password.
+        user.setPassword(passwordEncoder.encode(modifyRequest.getPassword()));
+        userRepository.save(user);
+
+
+        return ResponseEntity.ok(new MessageResponse("Password changed with success !"));
+    }
+
 }
+
