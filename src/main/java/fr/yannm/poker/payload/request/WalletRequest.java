@@ -7,27 +7,26 @@ import lombok.Setter;
 import javax.validation.constraints.NotBlank;
 
 /**
- * ModifyRequest is the class that permits a user to modify his own password with :
+ * WalletRequest is the class that permits a user to add or to substract with :
  * <ul>
- *     <li>A password</li>
+ *     <li>An amount</li>
  * </ul>
  *
  * @author Yann
  * @version 1.0
- * @name : ModifyRequest
- * @created 04/08/2021 - 14:49
+ * @name : WalletRequest
+ * @created 04/08/2021 - 15:18
  * @project poker
  * @copyright Yann
  **/
-public class ModifyRequest {
+public class WalletRequest {
 
     /**
-     * The new password.
+     * The amount to add or to substract.
      */
     @NotBlank
+    @ApiModelProperty("The amount to add or to substract.")
     @Getter
     @Setter
-    @ApiModelProperty("The new password.")
-    private String password;
-
+    private int amount;
 }

@@ -8,7 +8,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 /**
- * RecoveryRequest is the class that permits a user to ask new password if he forgot it.
+ * RecoveryRequest is the class that permits a user to ask new password if he forgot it with :
+ * <ul>
+ *     <li>An email</li>
+ *     <li>A password</li>
+ * </ul>
  *
  * @author Yann
  * @version 1.0
