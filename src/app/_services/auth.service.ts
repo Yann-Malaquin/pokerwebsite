@@ -22,4 +22,12 @@ export class AuthService {
     }, HTTPOPTIONS);
   }
 
+  registration(username: string, email: string, password: string): Observable<any> {
+    return this.http.post(`${environment.url}/signup`, {
+      username,
+      email,
+      password
+    }, HTTPOPTIONS);
+  }
+
 }

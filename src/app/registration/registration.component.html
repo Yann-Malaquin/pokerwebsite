@@ -1,0 +1,193 @@
+<!--
+
+=========================================================
+* Swipe - Mobile App One Page Bootstrap 5 Template
+=========================================================
+
+* Product Page: https://themesberg.com/product/bootstrap/swipe-free-mobile-app-one-page-bootstrap-5-template
+* Copyright 2020 Themesberg (https://www.themesberg.com)
+
+* Coded by https://themesberg.com
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. Contact us if you want to remove it.
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+</head>
+
+<body>
+<main>
+  <!-- Section -->
+  <section class="min-vh-100 d-flex align-items-center bg-soft">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="signin-inner mt-3 mt-lg-0 bg-white shadow border rounded border-light w-100">
+            <div class="row gx-0 align-items-center justify-content-between">
+              <div class="col-12 col-lg-5 d-none d-lg-block rounded-left">
+                <img src="./assets/img/illustrations/registry.jpg"
+                     alt="login image"
+                     width="100%">
+              </div>
+              <div class="col-12 col-lg-7 px-3 py-5 px-sm-5 px-md-6">
+                <div class="text-center text-md-center mb-4 mt-md-0">
+                  <h1 class="mb-0 h3">Créer un compte</h1>
+                </div>
+                <form [formGroup]="registrationForm"
+                      (ngSubmit)="onSubmit()">
+                  <div class="alert alert-warning" *ngIf="submitted && isSignUpFailed">
+                    Signup failed!<br />{{ errorMessage }}
+                  </div>
+                  <!-- Form -->
+                  <div class="form-group mb-4">
+                    <label for="username">Nom d'utilisateur</label>
+                    <div class="input-group">
+                      <span class="input-group-text"
+                            id="basic-addon2">
+                        <span class="fas fa-user"></span>
+                      </span>
+                      <input type="text"
+                             name="username"
+                             formControlName="username"
+                             class="form-control"
+                             placeholder="nom d'utilisateur"
+                             id="username"
+                             [ngClass]="{'is-invalid':registrationForm.get('username')?.errors && submitted}">
+                      <div class="invalid-feedback"
+                           *ngIf="registrationForm.get('username')?.hasError('required')">
+                        Nom d'utilisateur requis
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End of Form -->
+                  <!-- Form -->
+                  <div class="form-group mb-4">
+                    <label for="email">Email</label>
+                    <div class="input-group">
+                      <span class="input-group-text"
+                            id="basic-addon3">
+                        <span class="fas fa-envelope"></span>
+                      </span>
+                      <input type="email"
+                             name="email"
+                             formControlName="email"
+                             class="form-control"
+                             placeholder="exemple@domaine.com"
+                             id="email"
+                             [ngClass]="{'is-invalid':registrationForm.get('email')?.errors && submitted}">
+                      <div class="invalid-feedback"
+                           *ngIf="registrationForm.get('email')?.hasError('required')">
+                        Email requis
+                      </div>
+                      <div class="invalid-feedback"
+                           *ngIf="registrationForm.get('email')?.hasError('email')">
+                        Email invalide
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End of Form -->
+                  <div class="form-group">
+                    <!-- Form -->
+                    <div class="form-group mb-4">
+                      <label for="password">Mot de passe</label>
+                      <div class="input-group">
+                        <span class="input-group-text"
+                              id="basic-addon4">
+                          <span class="fas fa-unlock-alt"></span>
+                        </span>
+                        <input type="password"
+                               formControlName="password"
+                               class="form-control"
+                               [ngClass]="{'is-invalid':registrationForm.get('password')?.errors && submitted}"
+                               id="password"
+                               name="password"
+                               placeholder="motdepasse">
+                        <div class="invalid-feedback"
+                             *ngIf="registrationForm.get('password')?.hasError('required')">
+                          Mot de passe requis
+                        </div>
+                        <div class="invalid-feedback"
+                             *ngIf="registrationForm.get('password')?.hasError('minlength')">
+                          Mot de passe doit contenir au minimun 6 caractères
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End of Form -->
+                    <!-- Form -->
+                    <div class="form-group mb-4">
+                      <label for="confirmPassword">Confirmer mot de passe</label>
+                      <div class="input-group">
+                        <span class="input-group-text"
+                              id="basic-addon5">
+                          <span class="fas fa-unlock-alt"></span>
+                        </span>
+                        <input type="password"
+                               formControlName="confirmPassword"
+                               class="form-control"
+                               [ngClass]="{'is-invalid':registrationForm.get('confirmPassword')?.errors && submitted}"
+                               id="confirmPassword"
+                               name="confirmPassword"
+                               placeholder="motdepasse"
+                               autocomplete>
+                        <div class="invalid-feedback"
+                             *ngIf="registrationForm.get('confirmPassword')?.hasError('passwordMismatch') && submitted">
+                          Les mots de passe ne correspondent pas
+                        </div>
+                        <div class="invalid-feedback"
+                             *ngIf="registrationForm.get('confirmPassword')?.hasError('required')">
+                          Mot de passe requis
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End of Form -->
+                    <div class="form-check mb-4">
+                      <input class="form-check-input"
+                             type="checkbox"
+                             formControlName="terms"
+                             name="terms"
+                             id="terms"
+                             [ngClass]="{'is-invalid':registrationForm.get('terms')?.errors && submitted}">
+                      <label class="form-check-label"
+                             for="terms">
+                        J'ai lu et j'accepte
+                        <a href="#"
+                           class="text-primary font-weight-bold">les Conditions Générales</a>
+                        et
+                        <a href="#"
+                           class="text-primary font-weight-bold">la Charte sur le Respect de la Vie privée</a>
+                      </label>
+                      <div class="invalid-feedback"
+                           *ngIf="registrationForm.get('terms')?.hasError('required')">
+                        Les Conditions Générales être acceptées
+                      </div>
+                    </div>
+                  </div>
+
+                  <button type="submit"
+                          class="btn btn-block btn-primary">
+                    S'inscrire
+                  </button>
+                </form>
+                <div class="d-flex justify-content-center align-items-center mt-4">
+                                        <span class="font-weight-normal">
+                                            Déjà un compte ?
+                                            <a [routerLink]="['/connexion']" class="font-weight-bold">Se connecter</a>
+                                        </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+</body>
+
+</html>

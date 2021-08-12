@@ -5,13 +5,14 @@ import {AppComponent} from './app.component';
 import {NavbarComponent} from "./base/navbar/navbar.component";
 import {FooterComponent} from "./base/footer/footer.component";
 import {AppRoutingModule} from "./app-routing.module";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { HomeComponent } from './home/home.component';
 import {RouterModule} from "@angular/router";
 import { LoginComponent } from './login/login.component';
-
+import { RegistrationComponent } from './registration/registration.component';
+import { authInterceptorProviders } from './_helpers/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { LoginComponent } from './login/login.component';
     NavbarComponent,
     FooterComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -27,9 +29,10 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     HttpClientModule,
     MDBBootstrapModule.forRoot(),
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {
