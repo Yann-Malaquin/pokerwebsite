@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from "../_services/user.service";
 import {FormBuilder, Validators} from "@angular/forms";
 import {CustomValidationService} from "../_services/custom-validation.service";
+import {NavbarService} from "../_services/navbar.service";
+import {FooterService} from "../_services/footer.service";
 
 @Component({
   selector: 'app-recovery',
@@ -23,7 +25,9 @@ export class RecoveryComponent implements OnInit {
 
   constructor(private userService: UserService,
               private fb: FormBuilder,
-              private customValidator: CustomValidationService) {
+              private customValidator: CustomValidationService,
+              private navbarService: NavbarService,
+              private footerService: FooterService) {
 
     console.log(this.submitted);
     this.registrationForm = this.fb.group({
@@ -40,7 +44,8 @@ export class RecoveryComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.navbarService.hide();
+    this.footerService.hide();
   }
 
 
