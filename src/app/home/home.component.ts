@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {NavbarService} from "../_services/navbar.service";
+import {FooterService} from "../_services/footer.service";
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(public navbarService: NavbarService,
+              public footerService: FooterService) { }
 
   ngOnInit(): void {
+    this.navbarService.show();
+    this.footerService.show();
   }
 
 }
