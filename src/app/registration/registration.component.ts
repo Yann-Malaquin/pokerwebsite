@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {CustomValidationService} from "../_services/custom-validation.service";
 import {AuthService} from "../_services/auth.service";
+import {NavbarService} from "../_services/navbar.service";
+import {FooterService} from "../_services/footer.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -25,7 +28,10 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private fb: FormBuilder,
-              private customValidator: CustomValidationService) {
+              private customValidator: CustomValidationService,
+              private navbarService: NavbarService,
+              private footerService: FooterService,
+              private route: Router) {
 
     console.log(this.submitted);
     this.registrationForm = this.fb.group({
@@ -44,7 +50,8 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.navbarService.hide();
+    this.footerService.hide();
   }
 
 
@@ -61,6 +68,7 @@ export class RegistrationComponent implements OnInit {
           console.log(data);
           this.isSuccessful = true;
           this.isSignUpFailed = false;
+            this.route.navigate(['']);
         },
         err => {
           this.errorMessage = err.error.message;

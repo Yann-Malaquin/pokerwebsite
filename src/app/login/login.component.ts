@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../_services/auth.service";
 import {TokenStorageService} from "../_services/token-storage.service";
 import {Router} from "@angular/router";
+import {NavbarService} from "../_services/navbar.service";
+import {FooterService} from "../_services/footer.service";
 
 @Component({
   selector: 'app-login',
@@ -20,7 +22,11 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private route: Router) {
+  constructor(private authService: AuthService,
+              private tokenStorage: TokenStorageService,
+              private route: Router,
+              private navbarService: NavbarService,
+              private footerService: FooterService) {
   }
 
   ngOnInit(): void {
@@ -28,6 +34,9 @@ export class LoginComponent implements OnInit {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
     }
+    this.navbarService.hide();
+    this.footerService.hide();
+
   }
 
   onSubmit(): void {
@@ -42,7 +51,10 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
 
-        this.route.navigate(['']);
+        this.route.navigate(['/'])
+          .then(() => {
+            window.location.reload();
+          });
       },
       err => {
         this.errorMessage = err.error.message;
