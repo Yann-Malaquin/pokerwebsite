@@ -13,6 +13,7 @@ import {RouterModule} from "@angular/router";
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { RecoveryComponent } from './recovery/recovery.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
     FooterComponent,
     HomeComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    RecoveryComponent
   ],
   imports: [
     BrowserModule,
