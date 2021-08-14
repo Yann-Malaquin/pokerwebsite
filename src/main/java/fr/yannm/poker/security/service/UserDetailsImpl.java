@@ -63,21 +63,63 @@ public class UserDetailsImpl implements UserDetails {
     private String password;
 
     /**
+     * The score of the user, in other word the total amount won.
+     */
+    @ApiModelProperty("The score of the user, in other word the total amount won.")
+    @Getter
+    private int score;
+
+    /**
+     * The number of game won.
+     */
+    @ApiModelProperty("The number of game won.")
+    @Getter
+    private int win;
+
+    /**
+     * The number of game lost.
+     */
+    @ApiModelProperty("The number of game lost.")
+    @Getter
+    private int lost;
+
+    /**
+     * The ratio won/lost.
+     */
+    @ApiModelProperty("The ratio won/lost.")
+    @Getter
+    private double ratio;
+
+    /**
      * Instantiates a new User details.
      *
      * @param id          the id
      * @param username    the username
      * @param email       the email
      * @param password    the password
+     * @param win         the win
+     * @param lost        the lost
+     * @param ratio       the ratio
      * @param authorities the authorities
      * @since 1.0
      */
-    public UserDetailsImpl(Long id, String username, String email, String password,
+    public UserDetailsImpl(Long id,
+                           String username,
+                           String email,
+                           String password,
+                           int score,
+                           int win,
+                           int lost,
+                           double ratio,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.score = score;
+        this.win = win;
+        this.lost = lost;
+        this.ratio = ratio;
         this.authorities = authorities;
     }
 
@@ -98,6 +140,10 @@ public class UserDetailsImpl implements UserDetails {
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
+                user.getScore(),
+                user.getWin(),
+                user.getLost(),
+                user.getRatio(),
                 authorities);
     }
 
