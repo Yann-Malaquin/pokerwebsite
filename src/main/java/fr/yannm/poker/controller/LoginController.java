@@ -97,8 +97,15 @@ public class LoginController {
                 .collect(Collectors.toList());
 
         // Return the response
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(),
-                userDetails.getUsername(), userDetails.getEmail(), roles));
+        return ResponseEntity.ok(new JwtResponse(jwt,
+                userDetails.getId(),
+                userDetails.getUsername(),
+                userDetails.getEmail(),
+                userDetails.getScore(),
+                userDetails.getWin(),
+                userDetails.getLost(),
+                userDetails.getRatio(),
+                roles));
     }
 
 

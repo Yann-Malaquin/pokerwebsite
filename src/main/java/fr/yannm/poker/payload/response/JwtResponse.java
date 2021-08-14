@@ -75,20 +75,68 @@ public class JwtResponse {
     private List<String> roles;
 
     /**
+     * The score of the user, in other word the total amount won.
+     */
+    @ApiModelProperty("The score of the user, in other word the total amount won.")
+    @Getter
+    @Setter
+    private int score;
+
+    /**
+     * The number of game won.
+     */
+    @ApiModelProperty("The number of game won.")
+    @Getter
+    @Setter
+    private int win;
+
+    /**
+     * The number of game lost.
+     */
+    @ApiModelProperty("The number of game lost.")
+    @Getter
+    @Setter
+    private int lost;
+
+    /**
+     * The ratio won/lost.
+     */
+    @ApiModelProperty("The ratio won/lost.")
+    @Getter
+    @Setter
+    private double ratio;
+
+    /**
      * Instantiates a new Jwt response.
      *
      * @param accessToken the access token
      * @param id          the id
      * @param username    the username
      * @param email       the email
+     * @param score       the score
+     * @param win         the win
+     * @param lost        the lost
+     * @param ratio       the ratio
      * @param roles       the roles
      * @since 1.0
      */
-    public JwtResponse(String accessToken, Long id, String username, String email, List<String> roles) {
+    public JwtResponse(String accessToken,
+                       Long id,
+                       String username,
+                       String email,
+                       int score,
+                       int win,
+                       int lost,
+                       double ratio,
+                       List<String> roles) {
         this.token = accessToken;
         this.id = id;
         this.username = username;
         this.email = email;
+        this.score = score;
+        this.win = win;
+        this.lost = lost;
+        this.ratio = ratio;
         this.roles = roles;
     }
 }

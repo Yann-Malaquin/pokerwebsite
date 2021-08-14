@@ -1,6 +1,7 @@
 package fr.yannm.poker.controller;
 
 import fr.yannm.poker.model.User;
+import fr.yannm.poker.payload.request.ProfileRequest;
 import fr.yannm.poker.payload.request.WalletRequest;
 import fr.yannm.poker.payload.response.MessageResponse;
 import fr.yannm.poker.repository.UserRepository;
@@ -139,6 +140,45 @@ public class UserController {
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("Money substracted with success !"));
+    }
+
+    /**
+     * Update the profile of the user
+     *
+     * @param id             the id of the user
+     * @param profileRequest the form
+     * @return the response entity
+     */
+    @PutMapping("{id}/updateProfile")
+    public ResponseEntity<?> updateProfile(@PathVariable("id") Long id,
+                                           @Valid @RequestBody ProfileRequest profileRequest) {
+
+        Optional<User> userOptional = userRepository.findById(id);
+        User user;
+        if (userOptional.isPresent()) {
+            user = userOptional.get();
+        } else {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse(ERRORMESSAGE));
+        }
+
+        // Check if the username is already taken
+        if (userRepository.existsByUsername(profileRequest.getUsername())){
+            return ResponseEntity.
+                    badRequest()
+                    .body(new MessageResponse("Username already taken"));
+        }
+
+        // Setting the new username
+        user.setUsername(profileRequest.getUsername());
+
+        // Save the user
+        userRepository.save(user);
+
+        return ResponseEntity.ok(new MessageResponse("Profile updated with success !"));
+
+
     }
 
 
