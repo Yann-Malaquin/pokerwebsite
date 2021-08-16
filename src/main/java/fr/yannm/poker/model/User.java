@@ -7,6 +7,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -95,7 +97,7 @@ public class User {
     @ApiModelProperty("The number of game won.")
     @Getter
     @Setter
-    private int win = 0;
+    private String win = "0";
 
     /**
      * The number of game lost.
@@ -103,14 +105,13 @@ public class User {
     @ApiModelProperty("The number of game lost.")
     @Getter
     @Setter
-    private int lost = 0;
+    private String lost = "0";
 
     /**
      * The ratio won/lost.
      */
     @ApiModelProperty("The ratio won/lost.")
     @Getter
-    @Setter
     private double ratio = 0.0;
 
     /**
@@ -140,8 +141,14 @@ public class User {
      * @param lost     the lost
      * @param ratio    the ratio
      */
-    public User(String username, String email, String password, int wallet, int score,
-                int win, int lost, double ratio) {
+    public User(String username,
+                String email,
+                String password,
+                int wallet,
+                int score,
+                String win,
+                String lost,
+                double ratio) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -150,5 +157,11 @@ public class User {
         this.win = win;
         this.lost = lost;
         this.ratio = ratio;
+    }
+
+    public void setRatio() {
+        this.ratio = new BigDecimal(win)
+                .divide(new BigDecimal(lost),2, RoundingMode.UP)
+                .doubleValue();
     }
 }

@@ -74,14 +74,14 @@ public class UserDetailsImpl implements UserDetails {
      */
     @ApiModelProperty("The number of game won.")
     @Getter
-    private int win;
+    private String win;
 
     /**
      * The number of game lost.
      */
     @ApiModelProperty("The number of game lost.")
     @Getter
-    private int lost;
+    private String lost;
 
     /**
      * The ratio won/lost.
@@ -108,8 +108,8 @@ public class UserDetailsImpl implements UserDetails {
                            String email,
                            String password,
                            int score,
-                           int win,
-                           int lost,
+                           String win,
+                           String lost,
                            double ratio,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;

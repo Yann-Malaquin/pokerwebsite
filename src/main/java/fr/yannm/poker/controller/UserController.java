@@ -1,17 +1,25 @@
 package fr.yannm.poker.controller;
 
+import com.github.javafaker.Faker;
+import fr.yannm.poker.model.ERole;
+import fr.yannm.poker.model.Role;
 import fr.yannm.poker.model.User;
 import fr.yannm.poker.payload.request.ProfileRequest;
 import fr.yannm.poker.payload.request.WalletRequest;
 import fr.yannm.poker.payload.response.MessageResponse;
+import fr.yannm.poker.repository.RoleRepository;
 import fr.yannm.poker.repository.UserRepository;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * UserController is the controller that refers to the user.
@@ -32,6 +40,14 @@ public class UserController {
      */
     @Autowired
     UserRepository userRepository;
+
+    Faker faker = new Faker(new Locale("fr"));
+
+    @Autowired
+    RoleRepository roleRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     /**
      * The error message for the non duplication.
@@ -58,6 +74,34 @@ public class UserController {
         return ResponseEntity
                 .badRequest()
                 .body(new MessageResponse(ERRORMESSAGE));
+    }
+
+    @GetMapping("/createUsers")
+    @ApiOperation("The route permits to get a user by its id.")
+    public ResponseEntity<?> createUsers() {
+        User user;
+        Set<Role> roles = new HashSet<>();
+        String error = "Error: Role is not found.";
+        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                .orElseThrow(() -> new RuntimeException(error));
+        roles.add(userRole);
+
+        for (int i = 0; i < 10; i++) {
+            user = new User();
+            user.setUsername("user" + i);
+            user.setPassword(passwordEncoder.encode("123456"));
+            user.setEmail("user" + i + "@gmail.com");
+            user.setWallet(faker.number().numberBetween(1, 2500));
+            user.setScore(faker.number().numberBetween(1, 10000));
+            user.setWin(String.valueOf(faker.number().numberBetween(1, 100)));
+            user.setLost(String.valueOf(faker.number().numberBetween(1, 100)));
+            user.setRatio();
+            user.setRoles(roles);
+
+            userRepository.save(user);
+        }
+
+        return ResponseEntity.ok(new MessageResponse("Users created with success !"));
     }
 
     /**
@@ -164,7 +208,7 @@ public class UserController {
         }
 
         // Check if the username is already taken
-        if (userRepository.existsByUsername(profileRequest.getUsername())){
+        if (userRepository.existsByUsername(profileRequest.getUsername())) {
             return ResponseEntity.
                     badRequest()
                     .body(new MessageResponse("Username already taken"));
