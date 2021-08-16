@@ -88,7 +88,7 @@ public class JwtResponse {
     @ApiModelProperty("The number of game won.")
     @Getter
     @Setter
-    private int win;
+    private String win;
 
     /**
      * The number of game lost.
@@ -96,7 +96,7 @@ public class JwtResponse {
     @ApiModelProperty("The number of game lost.")
     @Getter
     @Setter
-    private int lost;
+    private String lost;
 
     /**
      * The ratio won/lost.
@@ -125,8 +125,8 @@ public class JwtResponse {
                        String username,
                        String email,
                        int score,
-                       int win,
-                       int lost,
+                       String win,
+                       String lost,
                        double ratio,
                        List<String> roles) {
         this.token = accessToken;

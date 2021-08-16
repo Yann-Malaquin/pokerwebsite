@@ -94,7 +94,7 @@ public class RegistryController {
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 passwordEncoder.encode(signUpRequest.getPassword()),
-                0, 0, 0, 0, 0.0);
+                0, 0, "0", "0", 0.0);
 
         // Setting the roles of the user
         Set<String> strRoles = signUpRequest.getRole();
