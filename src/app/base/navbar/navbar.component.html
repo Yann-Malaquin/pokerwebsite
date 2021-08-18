@@ -22,7 +22,7 @@
         <a class="nav-link" [routerLink]="['/inscription']">Inscription</a>
       </li>
       <li class="nav-item" *ngIf="isLoggedIn">
-        <a class="nav-link" [routerLink]="['/connexion']">Profil</a>
+        <a class="nav-link" [routerLink]="['/profil']">Profil</a>
       </li>
       <li class="nav-item" *ngIf="isLoggedIn">
         <a class="nav-link" (click)="logout()">Déconnexion</a>

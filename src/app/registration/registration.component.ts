@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {CustomValidationService} from "../_services/custom-validation.service";
 import {AuthService} from "../_services/auth.service";
@@ -26,14 +26,17 @@ export class RegistrationComponent implements OnInit {
     terms: [false]
   });
 
+
+
+
   constructor(private authService: AuthService,
               private fb: FormBuilder,
               private customValidator: CustomValidationService,
               private navbarService: NavbarService,
               private footerService: FooterService,
-              private route: Router) {
+              private route: Router
+              ) {
 
-    console.log(this.submitted);
     this.registrationForm = this.fb.group({
         username: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
         email: ["", [Validators.required, Validators.email]],
@@ -48,6 +51,7 @@ export class RegistrationComponent implements OnInit {
         )
       });
   }
+
 
   ngOnInit() {
     this.navbarService.hide();
