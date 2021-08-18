@@ -209,9 +209,15 @@ public class UserController {
 
         // Check if the username is already taken
         if (userRepository.existsByUsername(profileRequest.getUsername())) {
-            return ResponseEntity.
-                    badRequest()
-                    .body(new MessageResponse("Username already taken"));
+            Optional<User> userTest = userRepository.findByUsername(profileRequest.getUsername());
+
+            if (userTest.isPresent()) {
+                if (userTest.get().getId() != id) {
+                    return ResponseEntity.
+                            badRequest()
+                            .body(new MessageResponse("Username already taken"));
+                }
+            }
         }
 
         // Setting the new username
@@ -221,8 +227,6 @@ public class UserController {
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("Profile updated with success !"));
-
-
     }
 
 
