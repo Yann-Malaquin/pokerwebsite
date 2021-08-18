@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
@@ -19,6 +19,12 @@ export class UserService {
     return this.http.put(`${environment.url}/recovery`, {
       email,
       password
+    }, HTTPOPTIONS);
+  }
+
+  updateProfile(id: number, username: string): Observable<any> {
+    return this.http.put(`${environment.url}/${id}/updateProfile`, {
+      username
     }, HTTPOPTIONS);
   }
 }

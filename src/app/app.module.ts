@@ -14,6 +14,8 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { RecoveryComponent } from './recovery/recovery.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ModifyComponent } from './profile/modify/modify.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { RecoveryComponent } from './recovery/recovery.component';
     HomeComponent,
     LoginComponent,
     RegistrationComponent,
-    RecoveryComponent
+    RecoveryComponent,
+    ProfileComponent,
+    ModifyComponent
   ],
   imports: [
     BrowserModule,
