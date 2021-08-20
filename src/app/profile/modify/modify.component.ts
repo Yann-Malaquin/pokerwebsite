@@ -3,6 +3,7 @@ import {TokenStorageService} from "../../_services/token-storage.service";
 import {Router} from "@angular/router";
 import {FormBuilder, Validators} from "@angular/forms";
 import {UserService} from "../../_services/user.service";
+import {DatasharingService} from "../../_services/datasharing.service";
 
 @Component({
   selector: 'app-modify',
@@ -29,10 +30,12 @@ export class ModifyComponent implements OnInit {
   @Input() ratio = 0.0;
   @Input() score = 0;
 
+
   constructor(private tokenStorageService: TokenStorageService,
               public router: Router,
               private fb: FormBuilder,
-              private userService: UserService) {
+              private userService: UserService,
+              private dataSharing: DatasharingService) {
 
     this.user = this.tokenStorageService.getUser();
     this.modifyForm = this.fb.group({
@@ -60,7 +63,10 @@ export class ModifyComponent implements OnInit {
           console.log(data);
           this.isSuccessful = true;
           this.isModifyFailed = false;
-          this.router.navigate(['/profil']);
+          this.user.username = this.modifyForm.get('username')?.value;
+          this.tokenStorageService.saveUser(this.user);
+          this.dataSharing.usernameUpdate.next(this.user.username);
+          this.router.navigate(['/profil'])
         },
         err => {
           this.errorMessage = err.error.message;

@@ -10,7 +10,7 @@ import {FooterService} from "../_services/footer.service";
 export class HomeComponent implements OnInit {
 
   constructor(public navbarService: NavbarService,
-              public footerService: FooterService) { }
+              public footerService: FooterService,) { }
 
   ngOnInit(): void {
     this.navbarService.show();

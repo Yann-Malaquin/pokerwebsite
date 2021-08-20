@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NavbarService} from "../../_services/navbar.service";
 import {TokenStorageService} from "../../_services/token-storage.service";
+import {DatasharingService} from "../../_services/datasharing.service";
+import {StoreService} from "../../_services/store.service";
 
 @Component({
   selector: 'app-navbar',
@@ -10,17 +12,35 @@ import {TokenStorageService} from "../../_services/token-storage.service";
 export class NavbarComponent implements OnInit {
 
   public isLoggedIn = false;
+  public username = '';
+  private user: any;
 
-  constructor(private tokenStorageService: TokenStorageService, public navbarService: NavbarService) {
+  constructor(private tokenStorageService: TokenStorageService,
+              public navbarService: NavbarService,
+              private dataSharing: DatasharingService,
+              private store: StoreService) {
+
+    this.user = this.tokenStorageService.getUser();
+    this.dataSharing.isLoggedIn.subscribe(value => {
+      this.isLoggedIn = value;
+    });
+
+    this.dataSharing.usernameUpdate.subscribe(value => {
+      this.username = value;
+    });
+
+    this.username = this.user.username;
 
   }
 
   ngOnInit() {
-    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    console.log(this.isLoggedIn);
   }
 
   logout(): void {
     this.tokenStorageService.signOut();
+    this.dataSharing.isLoggedIn.next(false);
+    this.store.saveLoggedIn(false);
     window.location.reload();
   }
 
