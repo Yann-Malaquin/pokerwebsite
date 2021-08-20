@@ -4,6 +4,8 @@ import {TokenStorageService} from "../_services/token-storage.service";
 import {Router} from "@angular/router";
 import {NavbarService} from "../_services/navbar.service";
 import {FooterService} from "../_services/footer.service";
+import {DatasharingService} from "../_services/datasharing.service";
+import {StoreService} from "../_services/store.service";
 
 @Component({
   selector: 'app-login',
@@ -26,7 +28,9 @@ export class LoginComponent implements OnInit {
               private tokenStorage: TokenStorageService,
               private route: Router,
               private navbarService: NavbarService,
-              private footerService: FooterService) {
+              private footerService: FooterService,
+              private dataSharing: DatasharingService,
+              private store: StoreService) {
   }
 
   ngOnInit(): void {
@@ -44,17 +48,18 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(username, password).subscribe(
       data => {
+        console.log(data);
+        console.log(data.accessToken);
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
-
-        this.route.navigate(['/'])
-          .then(() => {
-            window.location.reload();
-          });
+        this.dataSharing.isLoggedIn.next(true);
+        this.dataSharing.usernameUpdate.next(username);
+        this.store.saveLoggedIn(true);
+        this.route.navigate(['/']);
       },
       err => {
         this.errorMessage = err.error.message;

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {CustomValidationService} from "../_services/custom-validation.service";
 import {AuthService} from "../_services/auth.service";
@@ -27,15 +27,13 @@ export class RegistrationComponent implements OnInit {
   });
 
 
-
-
   constructor(private authService: AuthService,
               private fb: FormBuilder,
               private customValidator: CustomValidationService,
               private navbarService: NavbarService,
               private footerService: FooterService,
               private route: Router
-              ) {
+  ) {
 
     this.registrationForm = this.fb.group({
         username: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
@@ -72,7 +70,7 @@ export class RegistrationComponent implements OnInit {
           console.log(data);
           this.isSuccessful = true;
           this.isSignUpFailed = false;
-            this.route.navigate(['']);
+          this.route.navigate(['']);
         },
         err => {
           this.errorMessage = err.error.message;
