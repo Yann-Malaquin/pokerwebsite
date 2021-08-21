@@ -3,6 +3,7 @@ import {NavbarService} from "../../_services/navbar.service";
 import {TokenStorageService} from "../../_services/token-storage.service";
 import {DatasharingService} from "../../_services/datasharing.service";
 import {StoreService} from "../../_services/store.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +19,8 @@ export class NavbarComponent implements OnInit {
   constructor(private tokenStorageService: TokenStorageService,
               public navbarService: NavbarService,
               private dataSharing: DatasharingService,
-              private store: StoreService) {
+              private store: StoreService,
+              private router: Router) {
 
     this.user = this.tokenStorageService.getUser();
     this.dataSharing.isLoggedIn.subscribe(value => {
@@ -41,7 +43,7 @@ export class NavbarComponent implements OnInit {
     this.tokenStorageService.signOut();
     this.dataSharing.isLoggedIn.next(false);
     this.store.saveLoggedIn(false);
-    window.location.reload();
+    this.router.navigate(['']);
   }
 
 
