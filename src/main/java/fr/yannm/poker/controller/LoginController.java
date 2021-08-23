@@ -105,6 +105,7 @@ public class LoginController {
                 userDetails.getWin(),
                 userDetails.getLost(),
                 userDetails.getRatio(),
+                userDetails.getWallet(),
                 roles));
     }
 

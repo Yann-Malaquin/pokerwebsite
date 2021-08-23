@@ -14,6 +14,11 @@ import java.util.List;
  *     <li>An id</li>
  *     <li>A username</li>
  *     <li>An email</li>
+ *     <li>A score</li>
+ *     <li>A number of win</li>
+ *     <li>A number of lost</li>
+ *     <li>A ratio</li>
+ *     <li>A wallet</li>
  *     <li>A list of roles</li>
  * </ul>
  *
@@ -107,6 +112,14 @@ public class JwtResponse {
     private double ratio;
 
     /**
+     * The wallet of the user.
+     */
+    @ApiModelProperty("The wallet of the user.")
+    @Getter
+    @Setter
+    private int wallet;
+
+    /**
      * Instantiates a new Jwt response.
      *
      * @param accessToken the access token
@@ -117,6 +130,7 @@ public class JwtResponse {
      * @param win         the win
      * @param lost        the lost
      * @param ratio       the ratio
+     * @param wallet      the wallet
      * @param roles       the roles
      * @since 1.0
      */
@@ -128,6 +142,7 @@ public class JwtResponse {
                        String win,
                        String lost,
                        double ratio,
+                       int wallet,
                        List<String> roles) {
         this.token = accessToken;
         this.id = id;
@@ -137,6 +152,7 @@ public class JwtResponse {
         this.win = win;
         this.lost = lost;
         this.ratio = ratio;
+        this.wallet = wallet;
         this.roles = roles;
     }
 }

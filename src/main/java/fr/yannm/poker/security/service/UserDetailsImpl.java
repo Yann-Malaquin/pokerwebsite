@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.yannm.poker.model.User;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,8 +20,12 @@ import java.util.stream.Collectors;
  *     <li>An id</li>
  *     <li>A username</li>
  *     <li>An email</li>
- *     <li>A password</li>
+ *     <li>A score</li>
+ *     <li>A number of win</li>
+ *     <li>A number of lost</li>
+ *     <li>A ratio</li>
  *     <li>A wallet</li>
+ *     <li>A list of roles</li>
  * </ul>
  *
  * @author Yann
@@ -91,15 +96,25 @@ public class UserDetailsImpl implements UserDetails {
     private double ratio;
 
     /**
+     * The wallet of the user.
+     */
+    @ApiModelProperty("The wallet of the user.")
+    @Getter
+    @Setter
+    private int wallet;
+
+    /**
      * Instantiates a new User details.
      *
      * @param id          the id
      * @param username    the username
      * @param email       the email
      * @param password    the password
+     * @param score       the score
      * @param win         the win
      * @param lost        the lost
      * @param ratio       the ratio
+     * @param wallet      the wallet
      * @param authorities the authorities
      * @since 1.0
      */
@@ -111,6 +126,7 @@ public class UserDetailsImpl implements UserDetails {
                            String win,
                            String lost,
                            double ratio,
+                           int wallet,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
@@ -120,6 +136,7 @@ public class UserDetailsImpl implements UserDetails {
         this.win = win;
         this.lost = lost;
         this.ratio = ratio;
+        this.wallet = wallet;
         this.authorities = authorities;
     }
 
@@ -144,6 +161,7 @@ public class UserDetailsImpl implements UserDetails {
                 user.getWin(),
                 user.getLost(),
                 user.getRatio(),
+                user.getWallet(),
                 authorities);
     }
 
