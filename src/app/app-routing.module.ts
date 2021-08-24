@@ -12,12 +12,14 @@ const routes: Routes = [
   {path: 'connexion', component: LoginComponent},
   {path: 'inscription', component: RegistrationComponent},
   {path: 'recovery', component: RecoveryComponent},
-  {path: 'profil', component: ProfileComponent, children: [
+  {
+    path: 'profil', component: ProfileComponent, children: [
       {
         path: 'modification',
         component: ModifyComponent
       }
-    ]}
+    ]
+  }
 ]
 
 @NgModule({

@@ -15,4 +15,6 @@ export class DatasharingService {
   public usernameUpdate: BehaviorSubject<string> = new BehaviorSubject<string>(this.tokenStorage.getUser().username);
 
   public isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.store.isLoggedIn());
+
+  public walletUpdate: BehaviorSubject<number> = new BehaviorSubject<number>(this.tokenStorage.getUser().wallet);
 }

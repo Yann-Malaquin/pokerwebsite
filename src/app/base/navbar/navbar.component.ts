@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
 
   public isLoggedIn = false;
   public username = '';
+  public wallet = 0;
   private user: any;
 
   constructor(private tokenStorageService: TokenStorageService,
@@ -23,6 +24,7 @@ export class NavbarComponent implements OnInit {
               private router: Router) {
 
     this.user = this.tokenStorageService.getUser();
+    console.log(this.user);
     this.dataSharing.isLoggedIn.subscribe(value => {
       this.isLoggedIn = value;
     });
@@ -31,7 +33,12 @@ export class NavbarComponent implements OnInit {
       this.username = value;
     });
 
+    this.dataSharing.walletUpdate.subscribe(value => {
+      this.wallet = value;
+    });
+
     this.username = this.user.username;
+    this.wallet = this.user.wallet;
 
   }
 
