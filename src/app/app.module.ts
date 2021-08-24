@@ -16,6 +16,7 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { RecoveryComponent } from './recovery/recovery.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ModifyComponent } from './profile/modify/modify.component';
+import { BankComponent } from './bank/bank.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ModifyComponent } from './profile/modify/modify.component';
     RegistrationComponent,
     RecoveryComponent,
     ProfileComponent,
-    ModifyComponent
+    ModifyComponent,
+    BankComponent
   ],
   imports: [
     BrowserModule,
