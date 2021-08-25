@@ -27,4 +27,16 @@ export class UserService {
       username
     }, HTTPOPTIONS);
   }
+
+  addMoney(id: number, amount: number): Observable<any> {
+    return this.http.put(`${environment.url}/${id}/add_money`, {
+      amount
+    }, HTTPOPTIONS);
+  }
+
+  substractMoney(id: number, amount: number): Observable<any> {
+    return this.http.put(`${environment.url}/${id}/substract_money`, {
+      amount
+    }, HTTPOPTIONS);
+  }
 }

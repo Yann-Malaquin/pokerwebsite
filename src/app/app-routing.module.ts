@@ -6,6 +6,7 @@ import {RegistrationComponent} from "./registration/registration.component";
 import {RecoveryComponent} from "./recovery/recovery.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {ModifyComponent} from "./profile/modify/modify.component";
+import {BankComponent} from "./bank/bank.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -19,7 +20,8 @@ const routes: Routes = [
         component: ModifyComponent
       }
     ]
-  }
+  },
+  {path: 'depot', component: BankComponent}
 ]
 
 @NgModule({
