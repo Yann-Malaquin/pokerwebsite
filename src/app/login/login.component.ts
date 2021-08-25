@@ -58,6 +58,7 @@ export class LoginComponent implements OnInit {
         this.roles = this.tokenStorage.getUser().roles;
         this.dataSharing.isLoggedIn.next(true);
         this.dataSharing.usernameUpdate.next(username);
+        this.dataSharing.walletUpdate.next(this.tokenStorage.getUser().wallet);
         this.store.saveLoggedIn(true);
         this.route.navigate(['/']);
       },

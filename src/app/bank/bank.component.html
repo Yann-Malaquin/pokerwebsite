@@ -1,0 +1,82 @@
+<section class="mt-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="mt-3 mt-lg-0 bg-light shadow border rounded border-light w-100">
+          <div class="row gx-0 align-items-center justify-content-between">
+            <div class="col-12 col-lg-6 px-3 py-5 px-sm-5 px-md-6 border-right border-dark">
+              <div class="text-center text-md-center mb-4 mt-md-0">
+                <h1 class="mb-0 h3">Dépôt</h1>
+              </div>
+              <form class="mt-4"
+                    [formGroup]="addForm"
+                    (ngSubmit)="onAddSubmit()">
+                <!-- Form -->
+                <div class="form-group mb-4">
+                  <label for="add">Montant</label>
+                  <div class="input-group">
+                    <span class="input-group-text"
+                          id="basic-addon1">
+                      <span class="fas fa-euro-sign"></span>
+                    </span>
+                    <input type="number"
+                           class="form-control"
+                           placeholder="10"
+                           name="add"
+                           id="add"
+                           formControlName="add"
+                           [ngClass]="{'is-invalid':addForm.get('add')?.errors && isSubmittedAdd}"
+                    >
+                    <div class="invalid-feedback"
+                         *ngIf="addForm.get('add')?.hasError('required')">
+                      Valeur requise
+                    </div>
+                  </div>
+                </div>
+                <!-- End of Form -->
+                <button type="submit" class="btn btn-block btn-primary">Ajouter à mon portefeuille</button>
+                <div class="form-group">
+                </div>
+              </form>
+            </div>
+            <div class="col-12 col-lg-6 px-3 py-5 px-sm-5 px-md-6 border-left border-dark">
+              <div class="text-center text-md-center mb-4 mt-md-0">
+                <h1 class="mb-0 h3">Retrait</h1>
+              </div>
+              <form class="mt-4"
+                    [formGroup]="substractForm"
+                    (ngSubmit)="onSubstractSubmit()">
+                <!-- Form -->
+                <div class="form-group mb-4">
+                  <label for="substract">Montant</label>
+                  <div class="input-group">
+                    <span class="input-group-text"
+                          id="basic-addon2">
+                      <span class="fas fa-euro-sign"></span>
+                    </span>
+                    <input type="number"
+                           class="form-control"
+                           placeholder="10"
+                           name="substract"
+                           id="substract"
+                           formControlName="substract"
+                           [ngClass]="{'is-invalid':substractForm.get('substract')?.errors && isSubmittedSubstract}"
+                    >
+                    <div class="invalid-feedback"
+                         *ngIf="substractForm.get('substract')?.hasError('required')">
+                      Valeur requise
+                    </div>
+                  </div>
+                </div>
+                <!-- End of Form -->
+                <button type="submit" class="btn btn-block btn-primary">Retirer de mon portefeuille</button>
+                <div class="form-group">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

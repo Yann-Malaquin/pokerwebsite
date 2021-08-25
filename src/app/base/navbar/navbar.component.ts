@@ -24,7 +24,6 @@ export class NavbarComponent implements OnInit {
               private router: Router) {
 
     this.user = this.tokenStorageService.getUser();
-    console.log(this.user);
     this.dataSharing.isLoggedIn.subscribe(value => {
       this.isLoggedIn = value;
     });
