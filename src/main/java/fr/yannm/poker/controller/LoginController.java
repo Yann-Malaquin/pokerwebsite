@@ -101,12 +101,9 @@ public class LoginController {
                 userDetails.getId(),
                 userDetails.getUsername(),
                 userDetails.getEmail(),
-                userDetails.getScore(),
-                userDetails.getWin(),
-                userDetails.getLost(),
-                userDetails.getRatio(),
                 userDetails.getWallet(),
-                roles));
+                roles,
+                userDetails.getScoreboard()));
     }
 
 

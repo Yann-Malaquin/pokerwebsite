@@ -3,11 +3,13 @@ package fr.yannm.poker.controller;
 import com.github.javafaker.Faker;
 import fr.yannm.poker.model.ERole;
 import fr.yannm.poker.model.Role;
+import fr.yannm.poker.model.Scoreboard;
 import fr.yannm.poker.model.User;
 import fr.yannm.poker.payload.request.ProfileRequest;
 import fr.yannm.poker.payload.request.WalletRequest;
 import fr.yannm.poker.payload.response.MessageResponse;
 import fr.yannm.poker.repository.RoleRepository;
+import fr.yannm.poker.repository.ScoreboardRepository;
 import fr.yannm.poker.repository.UserRepository;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,9 @@ public class UserController {
      */
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ScoreboardRepository scoreboardRepository;
 
     Faker faker = new Faker(new Locale("fr"));
 
@@ -80,6 +85,7 @@ public class UserController {
     @ApiOperation("The route permits to get a user by its id.")
     public ResponseEntity<?> createUsers() {
         User user;
+        Scoreboard scoreboard;
         Set<Role> roles = new HashSet<>();
         String error = "Error: Role is not found.";
         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
@@ -88,17 +94,25 @@ public class UserController {
 
         for (int i = 0; i < 10; i++) {
             user = new User();
+            scoreboard = new Scoreboard();
+
             user.setUsername("user" + i);
             user.setPassword(passwordEncoder.encode("123456"));
             user.setEmail("user" + i + "@gmail.com");
             user.setWallet(faker.number().numberBetween(1, 2500));
-            user.setScore(faker.number().numberBetween(1, 10000));
-            user.setWin(String.valueOf(faker.number().numberBetween(1, 100)));
-            user.setLost(String.valueOf(faker.number().numberBetween(1, 100)));
-            user.setRatio();
             user.setRoles(roles);
 
             userRepository.save(user);
+
+            scoreboard.setScore(faker.number().numberBetween(1, 6000));
+            scoreboard.setWin(String.valueOf(faker.number().numberBetween(1, 100)));
+            scoreboard.setLost(String.valueOf(faker.number().numberBetween(1, 100)));
+            scoreboard.setRank(i);
+            scoreboard.setPlace(0);
+            scoreboard.setRatio();
+            scoreboard.setUser(user);
+            scoreboardRepository.save(scoreboard);
+
         }
 
         return ResponseEntity.ok(new MessageResponse("Users created with success !"));
