@@ -1,5 +1,6 @@
 package fr.yannm.poker.payload.response;
 
+import fr.yannm.poker.model.Scoreboard;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -80,44 +81,16 @@ public class JwtResponse {
     private List<String> roles;
 
     /**
-     * The score of the user, in other word the total amount won.
-     */
-    @ApiModelProperty("The score of the user, in other word the total amount won.")
-    @Getter
-    @Setter
-    private int score;
-
-    /**
-     * The number of game won.
-     */
-    @ApiModelProperty("The number of game won.")
-    @Getter
-    @Setter
-    private String win;
-
-    /**
-     * The number of game lost.
-     */
-    @ApiModelProperty("The number of game lost.")
-    @Getter
-    @Setter
-    private String lost;
-
-    /**
-     * The ratio won/lost.
-     */
-    @ApiModelProperty("The ratio won/lost.")
-    @Getter
-    @Setter
-    private double ratio;
-
-    /**
      * The wallet of the user.
      */
     @ApiModelProperty("The wallet of the user.")
     @Getter
     @Setter
     private int wallet;
+
+    @Getter
+    @Setter
+    private Scoreboard scoreboard;
 
     /**
      * Instantiates a new Jwt response.
@@ -126,10 +99,6 @@ public class JwtResponse {
      * @param id          the id
      * @param username    the username
      * @param email       the email
-     * @param score       the score
-     * @param win         the win
-     * @param lost        the lost
-     * @param ratio       the ratio
      * @param wallet      the wallet
      * @param roles       the roles
      * @since 1.0
@@ -138,21 +107,15 @@ public class JwtResponse {
                        Long id,
                        String username,
                        String email,
-                       int score,
-                       String win,
-                       String lost,
-                       double ratio,
                        int wallet,
-                       List<String> roles) {
+                       List<String> roles,
+                       Scoreboard scoreboard) {
         this.token = accessToken;
         this.id = id;
         this.username = username;
         this.email = email;
-        this.score = score;
-        this.win = win;
-        this.lost = lost;
-        this.ratio = ratio;
         this.wallet = wallet;
         this.roles = roles;
+        this.scoreboard = scoreboard;
     }
 }

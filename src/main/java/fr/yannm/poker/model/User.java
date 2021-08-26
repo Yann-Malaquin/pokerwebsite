@@ -1,5 +1,6 @@
 package fr.yannm.poker.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -84,35 +85,14 @@ public class User {
     private int wallet = 0;
 
     /**
-     * The score of the user, in other word the total amount won.
+     * The scoreboard of the user.
      */
-    @ApiModelProperty("The score of the user, in other word the total amount won.")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
+    @JsonIgnoreProperties({"user"})
+    @ApiModelProperty("The scoreboard of the user.")
     @Getter
     @Setter
-    private int score = 0;
-
-    /**
-     * The number of game won.
-     */
-    @ApiModelProperty("The number of game won.")
-    @Getter
-    @Setter
-    private String win = "0";
-
-    /**
-     * The number of game lost.
-     */
-    @ApiModelProperty("The number of game lost.")
-    @Getter
-    @Setter
-    private String lost = "0";
-
-    /**
-     * The ratio won/lost.
-     */
-    @ApiModelProperty("The ratio won/lost.")
-    @Getter
-    private double ratio = 0.0;
+    private Scoreboard scoreboard;
 
     /**
      * The role of the user.
@@ -136,32 +116,15 @@ public class User {
      * @param email    the email
      * @param password the password
      * @param wallet   the wallet
-     * @param score    the score
-     * @param win      the win
-     * @param lost     the lost
-     * @param ratio    the ratio
      */
     public User(String username,
                 String email,
                 String password,
-                int wallet,
-                int score,
-                String win,
-                String lost,
-                double ratio) {
+                int wallet) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.wallet = wallet;
-        this.score = score;
-        this.win = win;
-        this.lost = lost;
-        this.ratio = ratio;
     }
 
-    public void setRatio() {
-        this.ratio = new BigDecimal(win)
-                .divide(new BigDecimal(lost),2, RoundingMode.UP)
-                .doubleValue();
-    }
 }
