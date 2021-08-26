@@ -52,7 +52,7 @@
                  id="win"
                  class="form-control"
                  type="text"
-                 value="{{user.win}}"
+                 value="{{user.scoreboard.win}}"
                  disabled>
         </div>
       </div>
@@ -65,7 +65,7 @@
                  id="lost"
                  class="form-control"
                  type="text"
-                 value="{{user.lost}}"
+                 value="{{user.scoreboard.lost}}"
                  disabled>
         </div>
       </div>
@@ -79,7 +79,7 @@
                  id="ratio"
                  class="form-control"
                  type="text"
-                 value="{{user.ratio}}"
+                 value="{{user.scoreboard.ratio}}"
                  disabled>
         </div>
       </div>
@@ -92,7 +92,7 @@
                  id="score"
                  class="form-control"
                  type="text"
-                 value="{{user.score}} €"
+                 value="{{user.scoreboard.score}} €"
                  disabled>
         </div>
       </div>
@@ -102,6 +102,7 @@
     </div>
   </div>
 </div>
+
 <app-modify [id]="id"
             [email]="email"
             [username]="username"
