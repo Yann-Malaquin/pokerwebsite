@@ -38,10 +38,10 @@ export class ProfileComponent implements OnInit {
     this.id = this.user.id;
     this.username = this.user.username;
     this.email = this.user.email;
-    this.win = this.user.win;
-    this.lost = this.user.lost;
-    this.ratio = this.user.ratio;
-    this.score = this.user.score;
+    this.win = this.user.scoreboard.win;
+    this.lost = this.user.scoreboard.lost;
+    this.ratio = this.user.scoreboard.ratio;
+    this.score = this.user.scoreboard.score;
   }
 
 
