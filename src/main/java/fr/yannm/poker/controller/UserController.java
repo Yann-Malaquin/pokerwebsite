@@ -13,6 +13,7 @@ import fr.yannm.poker.repository.ScoreboardRepository;
 import fr.yannm.poker.repository.UserRepository;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -92,7 +93,7 @@ public class UserController {
                 .orElseThrow(() -> new RuntimeException(error));
         roles.add(userRole);
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 1; i < 11; i++) {
             user = new User();
             scoreboard = new Scoreboard();
 
@@ -127,7 +128,11 @@ public class UserController {
     @GetMapping("/users")
     @ApiOperation("The route permits to get the whole users.")
     public ResponseEntity<?> getUsers() {
-        return ResponseEntity.ok(userRepository.findAll());
+        return ResponseEntity.ok(
+                userRepository.findAll(
+                        Sort.by(Sort.Direction.ASC, "scoreboard.rank")
+                )
+        );
     }
 
     /**

@@ -112,4 +112,17 @@ public class Scoreboard {
                 .divide(new BigDecimal(lost), 2, RoundingMode.UP)
                 .doubleValue();
     }
+
+    @Override
+    public String toString() {
+        return "Scoreboard{" +
+                "id= " + id +
+                ", rank= " + rank +
+                ", place= " + place +
+                ", score= " + score +
+                ", win= '" + win + '\'' +
+                ", lost= '" + lost + '\'' +
+                ", ratio= " + ratio +
+                '}';
+    }
 }

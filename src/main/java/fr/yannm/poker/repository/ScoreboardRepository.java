@@ -4,6 +4,7 @@ import fr.yannm.poker.model.Scoreboard;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -25,6 +26,11 @@ public interface ScoreboardRepository extends JpaRepository<Scoreboard, Long> {
      */
     @ApiModelProperty("Find a user by its id.")
     Optional<Scoreboard> findById(Long id);
+
+    List<Scoreboard> findByOrderByRankAsc();
+
+    List<Scoreboard> findByOrderByScoreDesc();
+
 
 
 }
