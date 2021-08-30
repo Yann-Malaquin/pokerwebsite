@@ -2,10 +2,12 @@ package fr.yannm.poker.controller;
 
 import fr.yannm.poker.model.ERole;
 import fr.yannm.poker.model.Role;
+import fr.yannm.poker.model.Scoreboard;
 import fr.yannm.poker.model.User;
 import fr.yannm.poker.payload.request.SignupRequest;
 import fr.yannm.poker.payload.response.MessageResponse;
 import fr.yannm.poker.repository.RoleRepository;
+import fr.yannm.poker.repository.ScoreboardRepository;
 import fr.yannm.poker.repository.UserRepository;
 import fr.yannm.poker.security.jwt.JwtUtils;
 import io.swagger.annotations.ApiOperation;
@@ -47,6 +49,12 @@ public class RegistryController {
      */
     @Autowired
     UserRepository userRepository;
+
+    /**
+     * The interface used to query on the table scoreboard.
+     */
+    @Autowired
+    ScoreboardRepository scoreboardRepository;
 
     /**
      * The interface used to query on the table role.
@@ -95,6 +103,7 @@ public class RegistryController {
                 signUpRequest.getEmail(),
                 passwordEncoder.encode(signUpRequest.getPassword()),
                 0);
+        Scoreboard scoreboard = new Scoreboard();
 
         // Setting the roles of the user
         Set<String> strRoles = signUpRequest.getRole();
@@ -131,6 +140,10 @@ public class RegistryController {
         user.setRoles(roles);
         // Save in the database
         userRepository.save(user);
+
+        scoreboard.setUser(user);
+        scoreboard.setRank(Math.toIntExact(user.getId()));
+        scoreboardRepository.save(scoreboard);
 
         // Return the message of the registration if it is ok.
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
