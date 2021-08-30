@@ -39,4 +39,8 @@ export class UserService {
       amount
     }, HTTPOPTIONS);
   }
+
+  getUsers(): Observable<any> {
+    return this.http.get(`${environment.url}/users`, HTTPOPTIONS);
+  }
 }

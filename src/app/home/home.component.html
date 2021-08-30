@@ -1,1 +1,34 @@
-<p>home works!</p>
+<div class="min-vh-100 d-flex flex-row">
+  <div style="background:darkcyan; width: 80%"></div>
+  <div style="background: white; width: 20%">
+    <table class="border" style="width: 100%; text-align: center; overflow-x:auto; table-layout: fixed;">
+      <thead>
+      <tr class="border">
+        <th class="border">Joueur</th>
+        <th class="border" colspan="2">Rang</th>
+        <th class="border">Gain total</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users">
+        <td class="border">{{user.username}}</td>
+        <td class="border">
+          {{user.scoreboard.rank}}
+        </td>
+        <td class="border" *ngIf="user.scoreboard.place == 0">
+          -
+        </td>
+        <td class="border" *ngIf="user.scoreboard.place > 0" style="color: green">
+          <i class="fas fa-caret-up"></i>
+          {{user.scoreboard.place}}
+        </td>
+        <td class="border" *ngIf="user.scoreboard.place < 0" style="color: red">
+          <i class="fas fa-caret-down"></i>
+          {{user.scoreboard.place * -1}}
+        </td>
+        <td class="border">{{user.scoreboard.score}} €</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
